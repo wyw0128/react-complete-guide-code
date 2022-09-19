@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import ExpenseForm from './ExpenseForm';
-import './NewExpense.css';
+import ExpenseForm from "./ExpenseForm";
+import "./NewExpense.css";
 
 const NewExpense = (props) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,7 +24,16 @@ const NewExpense = (props) => {
   };
 
   return (
-    <div className='new-expense'>
+    <div className="new-expense">
+      {/* {isEditing ? (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        />
+      ) : (
+        <button onClick={startEditingHandler}>Add New Expense</button>
+      )} */}
+      {/* NOTE: We can set a conditional state to control which content to be shown.*/}
       {!isEditing && (
         <button onClick={startEditingHandler}>Add New Expense</button>
       )}
