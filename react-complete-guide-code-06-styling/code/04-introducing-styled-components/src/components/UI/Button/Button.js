@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-
+import styled from "styled-components";
+// NOTE: This syntax is called attacked template literal.
 const Button = styled.button`
   font: inherit;
   padding: 0.5rem 1.5rem;
@@ -8,7 +8,7 @@ const Button = styled.button`
   background: #8b005d;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
   cursor: pointer;
-
+  // NOTE: for a pseudo selectors, you can use the '&' symbol, that's supported by the styled component package.
   &:focus {
     outline: none;
   }
