@@ -1,6 +1,7 @@
-import React from 'react';
-
-import styles from './Button.module.css';
+import React from "react";
+// NOTE: When using css module, we need to import css file in this way, and rename css file to be css module file.
+// NOTE: And CSS Modules concept ensures that the CSS styles we set up in a CSS file are a scoped to the component we import this file into.
+import styles from "./Button.module.css";
 // import styled from 'styled-components';
 
 // const Button = styled.button`
@@ -29,7 +30,7 @@ import styles from './Button.module.css';
 //   }
 // `;
 
-const Button = props => {
+const Button = (props) => {
   return (
     <button type={props.type} className={styles.button} onClick={props.onClick}>
       {props.children}
