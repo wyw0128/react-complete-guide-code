@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Button from '../../UI/Button/Button';
-import styles from './CourseInput.module.css';
+import Button from "../../UI/Button/Button";
+import styles from "./CourseInput.module.css";
 
 const CourseInput = (props) => {
-  const [enteredValue, setEnteredValue] = useState('');
+  const [enteredValue, setEnteredValue] = useState("");
   const [isValid, setIsValid] = useState(true);
 
   const goalInputChangeHandler = (event) => {
@@ -26,7 +26,8 @@ const CourseInput = (props) => {
   return (
     <form onSubmit={formSubmitHandler}>
       <div
-        className={`${styles['form-control']} ${!isValid && styles.invalid}`}
+        // NOTE: This form-control has a dash which JS cannot recognize, but JS object value can also be accessed by using Object['key'].
+        className={`${styles["form-control"]} ${!isValid && styles.invalid}`}
       >
         <label>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
