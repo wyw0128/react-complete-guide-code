@@ -1,12 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import Card from './Card';
-import Button from './Button';
-import classes from './ErrorModal.module.css';
+import Card from "./Card";
+import Button from "./Button";
+import classes from "./ErrorModal.module.css";
 
 const ErrorModal = (props) => {
   return (
     <div>
+      {/* NOTE: This backdrop div allows users not to interact with the back of the error message modal. */}
       <div className={classes.backdrop} />
       <Card className={classes.modal}>
         <header className={classes.header}>
