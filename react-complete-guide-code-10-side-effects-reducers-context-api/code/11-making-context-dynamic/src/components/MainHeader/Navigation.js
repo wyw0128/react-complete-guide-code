@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import AuthContext from '../../store/auth-context';
-import classes from './Navigation.module.css';
+import AuthContext from "../../store/auth-context";
+import classes from "./Navigation.module.css";
 
 const Navigation = () => {
   const ctx = useContext(AuthContext);
@@ -21,6 +21,7 @@ const Navigation = () => {
         )}
         {ctx.isLoggedIn && (
           <li>
+            {/* NOTE: We can use context where you cannot just pass down values like strings objects and so on but where you can also pass down functions */}
             <button onClick={ctx.onLogout}>Logout</button>
           </li>
         )}
