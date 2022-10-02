@@ -99,12 +99,13 @@ const Login = (props) => {
   const validatePasswordHandler = () => {
     dispatchPassword({ type: "INPUT_BLUR" });
   };
-
+  // NOTE: This is a niche use case, but especially for something like focusing inputs and so on, this can be very useful.
   const submitHandler = (event) => {
     event.preventDefault();
     if (formIsValid) {
       authCtx.onLogin(emailState.value, passwordState.value);
     } else if (!emailIsValid) {
+      // NOTE: This focus method is what we defined in Input component through useImperativeHandle.
       emailInputRef.current.focus();
     } else {
       passwordInputRef.current.focus();
