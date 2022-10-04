@@ -1,33 +1,38 @@
-import { useReducer } from 'react';
+import { useReducer } from "react";
 
-import CartContext from './cart-context';
+import CartContext from "./cart-context";
 
 const defaultCartState = {
   items: [],
-  totalAmount: 0
+  totalAmount: 0,
 };
 
 const cartReducer = (state, action) => {
-  if (action.type === 'ADD') {
+  if (action.type === "ADD") {
+    // NOTE: The push() adds elements to the end of an array and returns the new length of the array. The concat() method is used to merge arrays. Concat does not change the existing arrays, but instead returns a new array.
     const updatedItems = state.items.concat(action.item);
-    const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
+    const updatedTotalAmount =
+      state.totalAmount + action.item.price * action.item.amount;
     return {
       items: updatedItems,
-      totalAmount: updatedTotalAmount
+      totalAmount: updatedTotalAmount,
     };
   }
   return defaultCartState;
 };
 
 const CartProvider = (props) => {
-  const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
+  const [cartState, dispatchCartAction] = useReducer(
+    cartReducer,
+    defaultCartState
+  );
 
   const addItemToCartHandler = (item) => {
-    dispatchCartAction({type: 'ADD', item: item});
+    dispatchCartAction({ type: "ADD", item: item });
   };
 
   const removeItemFromCartHandler = (id) => {
-    dispatchCartAction({type: 'REMOVE', id: id});
+    dispatchCartAction({ type: "REMOVE", id: id });
   };
 
   const cartContext = {
