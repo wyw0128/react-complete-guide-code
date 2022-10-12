@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import MoviesList from './components/MoviesList';
-import './App.css';
+import MoviesList from "./components/MoviesList";
+import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  // NOTE: We can change the then chains here to asynchronous code using async await.
   async function fetchMoviesHandler() {
     setIsLoading(true);
-    const response = await fetch('https://swapi.dev/api/films/');
+    const response = await fetch("https://swapi.dev/api/films/");
     const data = await response.json();
 
     const transformedMovies = data.results.map((movieData) => {
