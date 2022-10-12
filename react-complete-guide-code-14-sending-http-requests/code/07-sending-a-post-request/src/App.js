@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 
-import MoviesList from './components/MoviesList';
-import AddMovie from './components/AddMovie';
-import './App.css';
+import MoviesList from "./components/MoviesList";
+import AddMovie from "./components/AddMovie";
+import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -13,9 +13,11 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://react-http-6b4a6.firebaseio.com/movies.json');
+      const response = await fetch(
+        "https://react-http-43c2d-default-rtdb.firebaseio.com//movies.json"
+      );
       if (!response.ok) {
-        throw new Error('Something went wrong!');
+        throw new Error("Something went wrong!");
       }
 
       const data = await response.json();
@@ -25,6 +27,7 @@ function App() {
       for (const key in data) {
         loadedMovies.push({
           id: key,
+          // NOTE: We're drilling into that nested object we got into response.
           title: data[key].title,
           openingText: data[key].openingText,
           releaseDate: data[key].releaseDate,
@@ -43,13 +46,19 @@ function App() {
   }, [fetchMoviesHandler]);
 
   async function addMovieHandler(movie) {
-    const response = await fetch('https://react-http-6b4a6.firebaseio.com/movies.json', {
-      method: 'POST',
-      body: JSON.stringify(movie),
-      headers: {
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      "https://react-http-43c2d-default-rtdb.firebaseio.com/movies.json",
+      {
+        // NOTE: If you want to store data for the first time, should specify the method to POST and follow this implementation. If you don't specify a method, default would be GET.
+        method: "POST",
+        // NOTE: To convert a JavaScript object to JSON, we can use a utility method which exists in JavaScript. We can use the JSON object, which is built into browser side JavaScript and call stringify and this basically takes a JavaScript object or array and turns it JSON format.
+        body: JSON.stringify(movie),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
+    // NOTE: parses JSON response into native JavaScript objects
     const data = await response.json();
     console.log(data);
   }
