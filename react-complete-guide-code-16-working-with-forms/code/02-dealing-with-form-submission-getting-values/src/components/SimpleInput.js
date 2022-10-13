@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
 const SimpleInput = (props) => {
   const nameInputRef = useRef();
-  const [enteredName, setEnteredName] = useState('');
+  const [enteredName, setEnteredName] = useState("");
 
   const nameInputChangeHandler = (event) => {
     setEnteredName(event.target.value);
@@ -10,29 +10,29 @@ const SimpleInput = (props) => {
 
   const formSubmissionHandler = (event) => {
     event.preventDefault();
-
+    // NOTE: If you are only interested in it once when the form is submitted, a ref might be better because logging and updating the state value with every keystroke is a bit overkill then. However, if you of course need the value, the entered value after every keystroke, for example, for instant validation, then using the state is better.
     console.log(enteredName);
 
     const enteredValue = nameInputRef.current.value;
     console.log(enteredValue);
 
     // nameInputRef.current.value = ''; => NOT IDEAL, DON'T MANIPULATE THE DOM
-    setEnteredName('');
+    setEnteredName("");
   };
 
   return (
     <form onSubmit={formSubmissionHandler}>
-      <div className='form-control'>
-        <label htmlFor='name'>Your Name</label>
+      <div className="form-control">
+        <label htmlFor="name">Your Name</label>
         <input
           ref={nameInputRef}
-          type='text'
-          id='name'
+          type="text"
+          id="name"
           onChange={nameInputChangeHandler}
           value={enteredName}
         />
       </div>
-      <div className='form-actions'>
+      <div className="form-actions">
         <button>Submit</button>
       </div>
     </form>
