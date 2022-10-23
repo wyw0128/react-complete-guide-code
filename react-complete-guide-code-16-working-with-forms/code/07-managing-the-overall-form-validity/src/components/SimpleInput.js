@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const SimpleInput = (props) => {
-  const [enteredName, setEnteredName] = useState('');
+  const [enteredName, setEnteredName] = useState("");
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
 
-  const enteredNameIsValid = enteredName.trim() !== '';
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
+
+  const enteredNameIsValid = enteredName.trim() !== "";
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+
+  const enteredEmailIsValid = enteredEmail.includes("@");
+  const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
 
   let formIsValid = false;
 
-  if (enteredNameIsValid) {
+  if (enteredNameIsValid && enteredEmailIsValid) {
     formIsValid = true;
   }
 
@@ -17,8 +23,16 @@ const SimpleInput = (props) => {
     setEnteredName(event.target.value);
   };
 
+  const emailInputChangeHandler = (event) => {
+    setEnteredEmail(event.target.value);
+  };
+
   const nameInputBlurHandler = (event) => {
     setEnteredNameTouched(true);
+  };
+
+  const emailInputBlurHandler = (event) => {
+    setEnteredEmailTouched(true);
   };
 
   const formSubmissionHandler = (event) => {
@@ -33,30 +47,53 @@ const SimpleInput = (props) => {
     console.log(enteredName);
 
     // nameInputRef.current.value = ''; => NOT IDEAL, DON'T MANIPULATE THE DOM
-    setEnteredName('');
+    setEnteredName("");
     setEnteredNameTouched(false);
+
+    setEnteredEmail("");
+    setEnteredEmailTouched(false);
   };
 
   const nameInputClasses = nameInputIsInvalid
-    ? 'form-control invalid'
-    : 'form-control';
+    ? "form-control invalid"
+    : "form-control";
+
+  const emailInputClasses = emailInputIsInvalid
+    ? "form-control invalid"
+    : "form-control";
 
   return (
     <form onSubmit={formSubmissionHandler}>
       <div className={nameInputClasses}>
-        <label htmlFor='name'>Your Name</label>
+        <label htmlFor="name">Your Name</label>
         <input
-          type='text'
-          id='name'
+          type="text"
+          id="name"
           onChange={nameInputChangeHandler}
+          // NOTE: Every time you get out of focus from the input field, the event will trigger.
           onBlur={nameInputBlurHandler}
           value={enteredName}
         />
+
         {nameInputIsInvalid && (
-          <p className='error-text'>Name must not be empty.</p>
+          <p className="error-text">Name must not be empty.</p>
+        )}
+        <div className={emailInputClasses}>
+          <label htmlFor="email">Your Email</label>
+          <input
+            type="text"
+            id="email"
+            onChange={emailInputChangeHandler}
+            onBlur={emailInputBlurHandler}
+            value={enteredEmail}
+          />
+        </div>
+        {emailInputIsInvalid && (
+          <p className="error-text">Please enter a valid email.</p>
         )}
       </div>
-      <div className='form-actions'>
+      <div className="form-actions">
+        {/* NOTE: The disabled attribute can be set to keep a user from clicking on the button until some other condition has been met */}
         <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
